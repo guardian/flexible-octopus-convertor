@@ -12,7 +12,7 @@ object PayloadValidator extends Logging {
       case Success(json) =>
         json.validate[OctopusSingleBundlePayload] match {
           case JsSuccess(payload, _) => Some(payload)
-          case _: JsError => None
+          case _: JsError            => None
         }
       case _ => None
     }
@@ -23,7 +23,7 @@ object PayloadValidator extends Logging {
       case Success(json) =>
         json.validate[OctopusBundleCachePayload] match {
           case JsSuccess(payload, _) => Some(payload)
-          case _: JsError => None
+          case _: JsError            => None
         }
       case _ => None
     }

@@ -37,7 +37,8 @@ object Lambda extends Logging with CustomMetrics with DeadLetterQueue {
           val messageIndex = cacheData.thismessageindex.getOrElse(0)
           val totalMessages = cacheData.totalmessages.getOrElse(0)
           logger.info(
-            s"Processing daily snapshot, message $messageIndex of $totalMessages, sequence number: $sequenceNumber")
+            s"Processing daily snapshot, message $messageIndex of $totalMessages, sequence number: $sequenceNumber"
+          )
           cacheData.bundles.get.foreach(bundle => processBundle(bundle, sequenceNumber))
         }
         case _ => {
@@ -56,12 +57,14 @@ object Lambda extends Logging with CustomMetrics with DeadLetterQueue {
       Try(octopusBundle.as[StoryBundle]) match {
         case Success(bundle) =>
           logger.info(
-            s"Bundle passed validation, sequence number: $sequenceNumber, composer ID: ${bundle.composerId}")
+            s"Bundle passed validation, sequence number: $sequenceNumber, composer ID: ${bundle.composerId}"
+          )
           val serializedThriftBundle = serializeToBytes(bundle)
           stream.publish(serializedThriftBundle)
         case Failure(e) =>
           logger.info(
-            s"Bundle failed validation as StoryBundle, sequence number: $sequenceNumber, with error: $e")
+            s"Bundle failed validation as StoryBundle, sequence number: $sequenceNumber, with error: $e"
+          )
           cloudWatch.publishMetricEvent(Metrics.FailedThriftConversion)
           deadLetterQueue.sendMessage(Json.toJson(octopusBundle))
       }

@@ -31,7 +31,7 @@ libraryDependencies ++= Seq(
   "com.fasterxml.jackson.dataformat" % "jackson-dataformat-cbor" % "2.11.4",
   "com.gu" %% "flexible-octopus-model" % "0.5.0",
   "org.apache.thrift" % "libthrift" % "0.13.0",
-  "com.twitter" %% "scrooge-core" % "20.5.0"
+  "com.twitter" %% "scrooge-core" % "20.12.0"
 )
 
 assemblyJarName := s"${name.value}.jar"

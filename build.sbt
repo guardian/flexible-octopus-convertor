@@ -12,7 +12,6 @@ scalacOptions ++= Seq(
   "-deprecation",
   "-encoding",
   "UTF-8",
-  "-target:jvm-1.8",
   "-Ywarn-dead-code"
 )
 val awsSdkVersion = "1.11.804"

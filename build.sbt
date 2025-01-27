@@ -15,7 +15,7 @@ scalacOptions ++= Seq(
   "-target:jvm-1.8",
   "-Ywarn-dead-code"
 )
-val awsSdkVersion = "1.11.804"
+val awsSdkVersion = "1.11.1034"
 
 libraryDependencies ++= Seq(
   "com.amazonaws" % "aws-lambda-java-core" % "1.2.3",
@@ -35,7 +35,6 @@ libraryDependencies ++= Seq(
 )
 
 assemblyJarName := s"${name.value}.jar"
-
 
 assembly / assemblyMergeStrategy := {
   case PathList("META-INF", xs @ _*) => MergeStrategy.discard

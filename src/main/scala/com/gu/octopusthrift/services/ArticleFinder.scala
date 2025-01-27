@@ -24,31 +24,33 @@ object ArticleFinder extends Logging {
 
   // Prefer articles that are labelled both, then web, then print
   private def articlesForPreferredDestination(
-    articles: Map[String, Array[OctopusArticle]]): Array[OctopusArticle] = {
+      articles: Map[String, Array[OctopusArticle]]
+  ): Array[OctopusArticle] = {
     val forBoth = Try(articles(ForBoth))
     val forWeb = Try(articles(ForWeb))
     val forPrint = Try(articles(ForPrint))
 
     (forBoth, forWeb, forPrint) match {
-      case (Success(both), _, _) => both
-      case (Failure(_), Success(web), _) => web
+      case (Success(both), _, _)                    => both
+      case (Failure(_), Success(web), _)            => web
       case (Failure(_), Failure(_), Success(print)) => print
-      case _ => Array.empty[OctopusArticle]
+      case _                                        => Array.empty[OctopusArticle]
     }
   }
 
   // Prefer Body Text, then Panel Text, then Tabular Text
   private def articlesOfPreferredObjectType(
-    articles: Map[String, Array[OctopusArticle]]): Array[OctopusArticle] = {
+      articles: Map[String, Array[OctopusArticle]]
+  ): Array[OctopusArticle] = {
     val bodyText = Try(articles(BodyText))
     val panelText = Try(articles(PanelText))
     val tabularText = Try(articles(TabularText))
 
     (bodyText, panelText, tabularText) match {
-      case (Success(bodyTexts), _, _) => bodyTexts
-      case (Failure(_), Success(panelTexts), _) => panelTexts
+      case (Success(bodyTexts), _, _)                      => bodyTexts
+      case (Failure(_), Success(panelTexts), _)            => panelTexts
       case (Failure(_), Failure(_), Success(tabularTexts)) => tabularTexts
-      case _ => Array.empty[OctopusArticle]
+      case _                                               => Array.empty[OctopusArticle]
     }
   }
 
@@ -66,7 +68,8 @@ object ArticleFinder extends Logging {
         .map(a => a.copy(object_type = cleanObjectType(a.object_type)))
         .filter(a =>
           bodyTextObjects.contains(a.object_type) && validPublicationDestinations
-            .contains(a.for_publication.toLowerCase()))
+            .contains(a.for_publication.toLowerCase())
+        )
 
     if (onlyBodyTextArticles.isEmpty)
       // There are no suitable articles

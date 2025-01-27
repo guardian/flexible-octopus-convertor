@@ -27,15 +27,14 @@ libraryDependencies ++= Seq(
   "org.slf4j" % "slf4j-simple" % "2.0.16",
   "org.scalactic" %% "scalactic" % "3.2.19",
   "org.scalatest" %% "scalatest" % "3.2.19" % "test",
-  "com.typesafe.play" %% "play-json" % "2.8.1",
-  "com.fasterxml.jackson.dataformat" % "jackson-dataformat-cbor" % "2.11.0",
+  "com.typesafe.play" %% "play-json" % "2.8.2",
+  "com.fasterxml.jackson.dataformat" % "jackson-dataformat-cbor" % "2.11.4",
   "com.gu" %% "flexible-octopus-model" % "0.5.0",
-  "org.apache.thrift" % "libthrift" % "0.13.0",
-  "com.twitter" %% "scrooge-core" % "20.5.0"
+  "org.apache.thrift" % "libthrift" % "0.21.0",
+  "com.twitter" %% "scrooge-core" % "20.12.0"
 )
 
 assemblyJarName := s"${name.value}.jar"
-
 
 assembly / assemblyMergeStrategy := {
   case PathList("META-INF", xs @ _*) => MergeStrategy.discard

@@ -8,6 +8,7 @@ object Config {
     Config(
       thriftStreamName = System.getenv("thriftStream"),
       deadLetterQueue = System.getenv("deadLetterQueue"),
-      stage = System.getenv("stage"))
+      stage = System.getenv("stage")
+    )
   }
 }
